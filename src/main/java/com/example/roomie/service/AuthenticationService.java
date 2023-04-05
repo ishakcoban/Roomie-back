@@ -1,6 +1,7 @@
 package com.example.roomie.service;
 
 import com.example.roomie.entity.User;
+import com.example.roomie.mapper.UserMapper;
 import com.example.roomie.modal.request.AuthenticationRequest;
 import com.example.roomie.modal.request.RegisterRequest;
 import com.example.roomie.modal.response.AuthenticationResponse;
@@ -16,25 +17,20 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-    private final UserRepository repository;
+
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenService tokenService;
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
+    private final UserMapper userMapper;
 
-    public User register(RegisterRequest request) {
+    public void register(RegisterRequest request) throws Exception {
+
         userService.checkEmailExist(request.getEmail());
+        User user = userMapper.register(request);
+        userRepository.save(user);
 
-        var user = User.builder()
-                .userName(request.getUserName())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .gender(request.getGender())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .build();
-
-        return repository.save(user);
     }
 
     public AuthenticationResponse login(AuthenticationRequest request) throws Exception {
@@ -50,8 +46,9 @@ public class AuthenticationService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid login or password", e);
         }
 
-        var user = repository.findByEmail(request.getEmail())
+        var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
+
         var jwtToken = tokenService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)

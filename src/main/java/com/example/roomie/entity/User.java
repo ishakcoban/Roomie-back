@@ -3,14 +3,13 @@ package com.example.roomie.entity;
 import jakarta.persistence.*;
 
 import java.util.Collection;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Data
+@Setter
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,7 +32,6 @@ public class User implements UserDetails {
 
   @Column(nullable = false)
   private String gender;
-
 
   private String photoUrl;
 
