@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Setter
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -38,6 +38,9 @@ public class User implements UserDetails {
   @Column(nullable = false, unique = true)
   private String email;
 
+  @Column(nullable = false, unique = true)
+  private String deneme;
+
   @Column(nullable = false)
   private String password;
 
@@ -54,6 +57,10 @@ public class User implements UserDetails {
   @Override
   public String getUsername() {
     return email;
+  }
+
+  public String getUserName() {
+    return userName;
   }
 
   @Override

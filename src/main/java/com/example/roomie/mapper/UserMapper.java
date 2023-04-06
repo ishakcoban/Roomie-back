@@ -22,7 +22,8 @@ public class UserMapper {
 
         return UserDto.builder()
                 .id(user.getId())
-                .userName(user.getUsername())
+                .userName(user.getUserName())
+                .deneme(user.getDeneme())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .gender(user.getGender())
@@ -32,8 +33,10 @@ public class UserMapper {
     }
 
     public User register(RegisterRequest request) throws Exception{
+
         return User.builder()
                 .userName(request.getUserName())
+                .deneme(request.getDeneme())
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .gender(request.getGender())
