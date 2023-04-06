@@ -4,6 +4,7 @@ import com.example.roomie.entity.User;
 import com.example.roomie.modal.dto.UserDto;
 import com.example.roomie.modal.request.AuthenticationRequest;
 import com.example.roomie.modal.request.RegisterRequest;
+import com.example.roomie.modal.request.UserUpdateRequest;
 import com.example.roomie.modal.response.AuthenticationResponse;
 import com.example.roomie.modal.response.SuccessMessageResponse;
 import com.example.roomie.service.AuthenticationService;
@@ -31,8 +32,8 @@ public class UserController {
     }
 
     @PatchMapping
-    public ResponseEntity<?> updateUser(HttpServletRequest request,@RequestBody User user) throws Exception {
-        userService.updateUser(MDC.get(MdcConstant.X_USER_ID),user);
+    public ResponseEntity<?> updateUser(HttpServletRequest request,@RequestBody UserUpdateRequest userUpdateRequest) throws Exception {
+        userService.updateUser(MDC.get(MdcConstant.X_USER_ID),userUpdateRequest);
         return ResponseEntity.ok(new SuccessMessageResponse("User updated successfully!",request.getServletPath()));
     }
 
