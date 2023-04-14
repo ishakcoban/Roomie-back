@@ -35,7 +35,7 @@ public class AdvertMapper {
                 .location(advertRequest.getLocation())
                 .build();
     }
-    public java.util.List<AdvertDto> toDtoList(java.util.List<Advert> lists) {
-        return lists.stream().map(this::toDto).collect(Collectors.toList());
+    public java.util.List<AdvertDto> toDtoList(java.util.List<Advert> adverts) {
+        return adverts.stream().map(this::toDto).collect(Collectors.toList());
     }
 }

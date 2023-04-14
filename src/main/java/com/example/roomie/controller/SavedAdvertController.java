@@ -2,6 +2,7 @@ package com.example.roomie.controller;
 
 import com.example.roomie.entity.SavedAdvert;
 import com.example.roomie.modal.dto.AdvertDto;
+import com.example.roomie.modal.dto.SavedAdvertDto;
 import com.example.roomie.repository.SavedAdvertRepository;
 import com.example.roomie.service.AuthenticationService;
 import com.example.roomie.service.SavedAdvertService;
@@ -24,7 +25,7 @@ public class SavedAdvertController {
     private final SavedAdvertService savedAdvertService;
 
     @GetMapping
-    public List<SavedAdvert> getAllByUser() throws Exception {
+    public List<SavedAdvertDto> getAllByUser() throws Exception {
         return savedAdvertService.getAllByUser(MDC.get(MdcConstant.X_USER_ID));
     }
 }
