@@ -20,6 +20,4 @@ public class Location {
     private String district;
     private String neighbourhood;
 
-    @OneToOne(mappedBy = "location")
-    private Advert advert;
 }

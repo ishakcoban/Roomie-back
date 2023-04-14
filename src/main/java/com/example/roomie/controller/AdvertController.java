@@ -18,12 +18,22 @@ public class AdvertController {
     private final AdvertService advertService;
 
     @PostMapping
-    public void postAdvert(@RequestBody AdvertRequest advertRequest) throws Exception {
+    public void createAdvert(@RequestBody AdvertRequest advertRequest) throws Exception {
         advertService.createAdvert(advertRequest, MDC.get(MdcConstant.X_USER_ID));
     }
 
-    @GetMapping
-    public AdvertDto getAdvert() throws Exception {
-        return advertService.getAdvert("344cdf63-5a97-4459-b175-60195fc34ebc");
+    @GetMapping("/{id}")
+    public AdvertDto getAdvert(@PathVariable String id) throws Exception {
+        return advertService.getAdvert(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAdvert(@PathVariable String id) throws Exception {
+        advertService.deleteAdvert(id);
+    }
+
+    @PutMapping("/{id}")
+    public void updateAdvert(@PathVariable String id,@RequestBody AdvertRequest advertRequest) throws Exception {
+        advertService.updateAdvert(id,advertRequest);
     }
 }

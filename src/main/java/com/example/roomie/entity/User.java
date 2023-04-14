@@ -43,9 +43,6 @@ public class User implements UserDetails {
   @Column(nullable = false)
   private String password;
 
-  @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-  private List<Advert> reservations = new ArrayList<>();
-
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return null;

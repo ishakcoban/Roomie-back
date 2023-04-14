@@ -26,7 +26,25 @@ public class AdvertService {
         advertRepository.save(advert);
     }
 
-    public AdvertDto getAdvert(String id) throws Exception {
-        return advertMapper.toDto(advertRepository.findById(id).orElseThrow());
+    public AdvertDto getAdvert(String advertId) throws Exception {
+        return advertMapper.toDto(advertRepository.findById(advertId).orElseThrow());
+    }
+
+    public void deleteAdvert(String advertId) throws Exception {
+        Advert advert = advertRepository.findById(advertId).orElseThrow();
+        advertRepository.delete(advert);
+    }
+    public void updateAdvert(String advertId,AdvertRequest advertRequest) throws Exception {
+        Advert advert = advertRepository.findById(advertId).orElseThrow();
+        Location location = locationRepository.findById(advert.getLocation().getId()).orElseThrow();
+        advert.setHeader(advertRequest.getHeader());
+        advert.setDescription(advertRequest.getDescription());
+        advert.setPrice(advertRequest.getPrice());
+
+        location.setCity(advertRequest.getLocation().getCity());
+        location.setDistrict(advertRequest.getLocation().getDistrict());
+        location.setNeighbourhood(advertRequest.getLocation().getNeighbourhood());
+        advert.setLocation(location);
+        advertRepository.save(advert);
     }
 }
