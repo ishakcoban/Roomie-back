@@ -10,6 +10,8 @@ import org.slf4j.MDC;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/adverts")
 @RequiredArgsConstructor
@@ -20,6 +22,11 @@ public class AdvertController {
     @PostMapping
     public void createAdvert(@RequestBody AdvertRequest advertRequest) throws Exception {
         advertService.createAdvert(advertRequest, MDC.get(MdcConstant.X_USER_ID));
+    }
+
+    @GetMapping
+    public List<AdvertDto> getAllByUser() throws Exception {
+        return advertService.getAllByUser(MDC.get(MdcConstant.X_USER_ID));
     }
 
     @GetMapping("/{id}")

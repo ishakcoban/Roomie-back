@@ -24,7 +24,7 @@ public class SavedAdvertController {
     private final SavedAdvertService savedAdvertService;
 
     @GetMapping
-    public List<SavedAdvert> getAllByUserId() throws Exception {
-        return savedAdvertService.getAllByUserId(MDC.get(MdcConstant.X_USER_ID));
+    public List<SavedAdvert> getAllByUser() throws Exception {
+        return savedAdvertService.getAllByUser(MDC.get(MdcConstant.X_USER_ID));
     }
 }

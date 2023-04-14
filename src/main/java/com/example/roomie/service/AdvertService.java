@@ -12,6 +12,9 @@ import com.example.roomie.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class AdvertService {
@@ -24,6 +27,10 @@ public class AdvertService {
         User user = userRepository.findById(userId).orElseThrow();
         Advert advert = AdvertMapper.createAdvert(advertRequest,user);
         advertRepository.save(advert);
+    }
+
+    public List<AdvertDto> getAllByUser(String userId) throws Exception {
+        return advertMapper.toDtoList(advertRepository.findAllByUserId(userId));
     }
 
     public AdvertDto getAdvert(String advertId) throws Exception {

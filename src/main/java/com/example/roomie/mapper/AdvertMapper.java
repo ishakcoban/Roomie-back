@@ -8,6 +8,9 @@ import com.example.roomie.modal.request.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 @RequiredArgsConstructor
 public class AdvertMapper {
@@ -31,5 +34,8 @@ public class AdvertMapper {
                 .user(user)
                 .location(advertRequest.getLocation())
                 .build();
+    }
+    public java.util.List<AdvertDto> toDtoList(java.util.List<Advert> lists) {
+        return lists.stream().map(this::toDto).collect(Collectors.toList());
     }
 }

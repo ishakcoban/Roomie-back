@@ -13,7 +13,7 @@ public class SavedAdvertService {
 
     private final SavedAdvertRepository savedAdvertRepository;
 
-    public List<SavedAdvert> getAllByUserId(String userId){
+    public List<SavedAdvert> getAllByUser(String userId){
         return savedAdvertRepository.findAllByUserId(userId);
     }
 }
