@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("api/user")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -35,6 +35,11 @@ public class UserController {
     public ResponseEntity<?> updateUser(HttpServletRequest request,@RequestBody UserUpdateRequest userUpdateRequest) throws Exception {
         userService.updateUser(MDC.get(MdcConstant.X_USER_ID),userUpdateRequest);
         return ResponseEntity.ok(new SuccessMessageResponse("User updated successfully!",request.getServletPath()));
+    }
+
+    @DeleteMapping
+    public void deleteUser() throws Exception {
+       userService.deleteUser(MDC.get(MdcConstant.X_USER_ID));
     }
 
 }

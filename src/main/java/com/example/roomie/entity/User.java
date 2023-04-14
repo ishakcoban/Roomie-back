@@ -2,7 +2,9 @@ package com.example.roomie.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -40,6 +42,9 @@ public class User implements UserDetails {
 
   @Column(nullable = false)
   private String password;
+
+  @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+  private List<Advert> reservations = new ArrayList<>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
