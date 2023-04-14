@@ -8,6 +8,7 @@ import com.example.roomie.modal.request.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,8 +22,10 @@ public class AdvertMapper {
                 .id(advert.getId())
                 .header(advert.getHeader())
                 .description(advert.getDescription())
-                .location(advert.getLocation())
                 .price(advert.getPrice())
+                .createdDate(advert.getCreatedDate())
+                .updatedDate(advert.getUpdatedDate())
+                .location(advert.getLocation())
                 .build();
     }
     public static Advert createAdvert(AdvertRequest advertRequest,User user) throws Exception{
@@ -31,6 +34,8 @@ public class AdvertMapper {
                 .header(advertRequest.getHeader())
                 .description(advertRequest.getDescription())
                 .price(advertRequest.getPrice())
+                .createdDate(LocalDateTime.now())
+                .updatedDate(null)
                 .user(user)
                 .location(advertRequest.getLocation())
                 .build();

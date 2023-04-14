@@ -3,6 +3,8 @@ package com.example.roomie.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @Builder
@@ -24,6 +26,12 @@ public class Advert {
 
     @Column(nullable = false)
     private int price;
+
+    @Column(nullable = false)
+    private LocalDateTime createdDate;
+
+    @Column(nullable = true)
+    private LocalDateTime updatedDate;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "id")

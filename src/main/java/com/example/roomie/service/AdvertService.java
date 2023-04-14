@@ -12,6 +12,7 @@ import com.example.roomie.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,7 +48,7 @@ public class AdvertService {
         advert.setHeader(advertRequest.getHeader());
         advert.setDescription(advertRequest.getDescription());
         advert.setPrice(advertRequest.getPrice());
-
+        advert.setUpdatedDate(LocalDateTime.now());
         location.setCity(advertRequest.getLocation().getCity());
         location.setDistrict(advertRequest.getLocation().getDistrict());
         location.setNeighbourhood(advertRequest.getLocation().getNeighbourhood());
