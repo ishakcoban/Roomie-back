@@ -31,19 +31,19 @@ public class UserService {
 
     public void updateUser(String id, UserUpdateRequest userUpdateRequest) {
 
-        User existingUser = userRepository.findById(id).orElseThrow();
+        User user = userRepository.findById(id).orElseThrow();
 
-        existingUser.setUserName(userUpdateRequest.getUserName());
-        existingUser.setFirstName(userUpdateRequest.getFirstName());
-        existingUser.setLastName(userUpdateRequest.getLastName());
-        existingUser.setEmail(userUpdateRequest.getEmail());
-        existingUser.setGender(userUpdateRequest.getGender());
+        user.setUserName(userUpdateRequest.getUserName());
+        user.setFirstName(userUpdateRequest.getFirstName());
+        user.setLastName(userUpdateRequest.getLastName());
+        user.setEmail(userUpdateRequest.getEmail());
+        user.setGender(userUpdateRequest.getGender());
 
-        userRepository.save(existingUser);
+        userRepository.save(user);
     }
 
     public void deleteUser(String id) {
-        User existingUser = userRepository.findById(id).orElseThrow();
-        userRepository.delete(existingUser);
+        User user = userRepository.findById(id).orElseThrow();
+        userRepository.delete(user);
     }
 }
