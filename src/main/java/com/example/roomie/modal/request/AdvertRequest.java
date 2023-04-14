@@ -1,5 +1,6 @@
 package com.example.roomie.modal.request;
 
+import com.example.roomie.entity.Location;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,4 +13,5 @@ public class AdvertRequest {
     private String header;
     private String description;
     private int price;
+    private Location location;
 }

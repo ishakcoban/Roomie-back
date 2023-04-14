@@ -20,16 +20,12 @@ public class AuthenticationController {
     private final AuthenticationService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> authenticate(
-            @RequestBody AuthenticationRequest request
-    ) throws Exception {
-        return ResponseEntity.ok(authService.login(request));
+    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest request) throws Exception {
+        return authService.login(request);
     }
 
     @PostMapping("/register")
-    public void register(
-            @RequestBody RegisterRequest request
-    ) throws Exception {
+    public void register(@RequestBody RegisterRequest request) throws Exception {
         authService.register(request);
     }
 

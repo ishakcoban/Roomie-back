@@ -18,7 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/users")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -27,14 +27,13 @@ public class UserController {
     private final AuthenticationService service;
 
     @GetMapping
-    public ResponseEntity<UserDto> getUser() throws Exception {
-        return ResponseEntity.ok(userService.getUserById(MDC.get(MdcConstant.X_USER_ID)));
+    public UserDto getUser() throws Exception {
+        return userService.getUserById(MDC.get(MdcConstant.X_USER_ID));
     }
 
     @PatchMapping
-    public ResponseEntity<?> updateUser(HttpServletRequest request,@RequestBody UserUpdateRequest userUpdateRequest) throws Exception {
+    public void updateUser(@RequestBody UserUpdateRequest userUpdateRequest) throws Exception {
         userService.updateUser(MDC.get(MdcConstant.X_USER_ID),userUpdateRequest);
-        return ResponseEntity.ok(new SuccessMessageResponse("User updated successfully!",request.getServletPath()));
     }
 
     @DeleteMapping
