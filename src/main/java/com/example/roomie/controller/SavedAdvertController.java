@@ -10,10 +10,7 @@ import com.example.roomie.service.UserService;
 import com.example.roomie.utils.MdcConstant;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.MDC;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,15 @@ public class SavedAdvertController {
     @GetMapping
     public List<SavedAdvertDto> getAllByUser() throws Exception {
         return savedAdvertService.getAllByUser(MDC.get(MdcConstant.X_USER_ID));
+    }
+
+    @GetMapping("/{advertId}")
+    public void saveAdvert(@PathVariable String advertId) throws Exception {
+        savedAdvertService.saveAdvert(MDC.get(MdcConstant.X_USER_ID),advertId);
+    }
+
+    @DeleteMapping("/{savedAdvertId}")
+    public void deleteSavedAdvertByUser(@PathVariable String savedAdvertId) throws Exception {
+        savedAdvertService.deleteSavedAdvertByUser(savedAdvertId);
     }
 }

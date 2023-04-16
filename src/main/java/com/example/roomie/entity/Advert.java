@@ -1,15 +1,18 @@
 package com.example.roomie.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
 @Entity
 @Table(name = "adverts")
 public class Advert {
@@ -40,4 +43,5 @@ public class Advert {
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id")
     private User user;
+
 }

@@ -31,7 +31,13 @@ public class AdvertService {
     }
 
     public List<AdvertDto> getAllByUser(String userId) throws Exception {
-        return advertMapper.toDtoList(advertRepository.findAllByUserId(userId));
+
+        List<Advert> adverts = advertRepository.findAllByUserId(userId);
+        return advertMapper.toDtoList(adverts);
+    }
+
+    public List<AdvertDto> getAllAdverts() throws Exception {
+        return advertMapper.toDtoList(advertRepository.findAll());
     }
 
     public AdvertDto getAdvert(String advertId) throws Exception {

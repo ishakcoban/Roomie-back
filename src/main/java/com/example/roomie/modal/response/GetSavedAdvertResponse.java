@@ -1,5 +1,6 @@
 package com.example.roomie.modal.response;
 
+import com.example.roomie.entity.Advert;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
-  private String token;
+public class GetSavedAdvertResponse {
+
+    private String id;
+    private Advert advert;
 }

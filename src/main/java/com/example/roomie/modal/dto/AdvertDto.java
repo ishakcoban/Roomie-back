@@ -1,6 +1,7 @@
 package com.example.roomie.modal.dto;
 
 import com.example.roomie.entity.Location;
+import com.example.roomie.entity.User;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,5 +19,6 @@ public class AdvertDto {
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
     private Location location;
+    private User user;
     private int price;
 }

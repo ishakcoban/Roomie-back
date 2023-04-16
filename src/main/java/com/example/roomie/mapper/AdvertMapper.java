@@ -26,6 +26,7 @@ public class AdvertMapper {
                 .createdDate(advert.getCreatedDate())
                 .updatedDate(advert.getUpdatedDate())
                 .location(advert.getLocation())
+                .user(advert.getUser())
                 .build();
     }
     public static Advert createAdvert(AdvertRequest advertRequest,User user) throws Exception{

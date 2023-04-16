@@ -2,6 +2,7 @@ package com.example.roomie.mapper;
 
 import com.example.roomie.entity.Advert;
 import com.example.roomie.entity.SavedAdvert;
+import com.example.roomie.entity.User;
 import com.example.roomie.modal.dto.AdvertDto;
 import com.example.roomie.modal.dto.SavedAdvertDto;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,16 @@ public class SavedAdvertMapper {
 
         return SavedAdvertDto.builder()
                 .id(savedAdvert.getId())
-                .user(savedAdvert.getUser())
                 .advert(savedAdvert.getAdvert())
+                .user(savedAdvert.getUser())
+                .build();
+    }
+
+    public SavedAdvert saveAdvert(Advert advert, User user){
+
+        return SavedAdvert.builder()
+                .user(user)
+                .advert(advert)
                 .build();
     }
 

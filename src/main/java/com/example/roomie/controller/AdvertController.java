@@ -29,6 +29,11 @@ public class AdvertController {
         return advertService.getAllByUser(MDC.get(MdcConstant.X_USER_ID));
     }
 
+    @GetMapping("/getAll")
+    public List<AdvertDto> getAllAdverts() throws Exception {
+        return advertService.getAllAdverts();
+    }
+
     @GetMapping("/{id}")
     public AdvertDto getAdvert(@PathVariable String id) throws Exception {
         return advertService.getAdvert(id);
