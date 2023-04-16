@@ -25,6 +25,7 @@ public class AdvertMapper {
                 .price(advert.getPrice())
                 .createdDate(advert.getCreatedDate())
                 .updatedDate(advert.getUpdatedDate())
+                .saved(advert.isSaved())
                 .location(advert.getLocation())
                 .user(userMapper.toDto(advert.getUser()))
                 .build();

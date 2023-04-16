@@ -36,6 +36,8 @@ public class Advert {
     @Column(nullable = true)
     private LocalDateTime updatedDate;
 
+    private boolean saved = false;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;

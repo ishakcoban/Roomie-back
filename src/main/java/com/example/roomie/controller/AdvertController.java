@@ -48,4 +48,9 @@ public class AdvertController {
     public void updateAdvert(@PathVariable String id,@RequestBody AdvertRequest advertRequest) throws Exception {
         advertService.updateAdvert(id,advertRequest);
     }
+
+    @PatchMapping("/{id}")
+    public void updateSavedStatusOfAdvert(@PathVariable String id) throws Exception {
+        advertService.updateSavedStatusOfAdvert(id);
+    }
 }

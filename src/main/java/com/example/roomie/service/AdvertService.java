@@ -48,6 +48,18 @@ public class AdvertService {
         Advert advert = advertRepository.findById(advertId).orElseThrow();
         advertRepository.delete(advert);
     }
+
+    public void updateSavedStatusOfAdvert(String advertId) throws Exception {
+        Advert advert = advertRepository.findById(advertId).orElseThrow();
+        if(advert.isSaved()){
+            advert.setSaved(false);
+        }else{
+            advert.setSaved(true);
+        }
+        advertRepository.save(advert);
+    }
+
+
     public void updateAdvert(String advertId,AdvertRequest advertRequest) throws Exception {
         Advert advert = advertRepository.findById(advertId).orElseThrow();
         Location location = locationRepository.findById(advert.getLocation().getId()).orElseThrow();

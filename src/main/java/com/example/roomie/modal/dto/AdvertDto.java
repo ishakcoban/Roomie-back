@@ -19,6 +19,7 @@ public class AdvertDto {
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
     private Location location;
+    private boolean saved;
     private UserDto user;
     private int price;
 }
