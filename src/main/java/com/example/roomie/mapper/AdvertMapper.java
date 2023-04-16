@@ -9,12 +9,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class AdvertMapper {
+    private final UserMapper userMapper;
 
     public AdvertDto toDto(Advert advert){
 
@@ -26,7 +26,7 @@ public class AdvertMapper {
                 .createdDate(advert.getCreatedDate())
                 .updatedDate(advert.getUpdatedDate())
                 .location(advert.getLocation())
-                .user(advert.getUser())
+                .user(userMapper.toDto(advert.getUser()))
                 .build();
     }
     public static Advert createAdvert(AdvertRequest advertRequest,User user) throws Exception{
