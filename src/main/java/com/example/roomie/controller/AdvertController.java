@@ -25,13 +25,18 @@ public class AdvertController {
     }
 
     @GetMapping
-    public List<AdvertDto> getAllByUser() throws Exception {
+    public List<AdvertDto> getAllAdvertsByUser() throws Exception {
         return advertService.getAllByUser(MDC.get(MdcConstant.X_USER_ID));
     }
 
     @GetMapping("/getAll")
     public List<AdvertDto> getAllAdverts() throws Exception {
         return advertService.getAllAdverts();
+    }
+
+    @GetMapping("/getAllSavedAdverts")
+    public List<AdvertDto> getAllSavedAdvertsByUser() throws Exception {
+        return advertService.getAllSavedAdvertsByUser(MDC.get(MdcConstant.X_USER_ID));
     }
 
     @GetMapping("/{id}")

@@ -40,6 +40,12 @@ public class AdvertService {
         return advertMapper.toDtoList(advertRepository.findAll());
     }
 
+    public List<AdvertDto> getAllSavedAdvertsByUser(String userId) throws Exception {
+
+        List<Advert> adverts = advertRepository.findAllBySavedAndUserId(true,userId);
+        return advertMapper.toDtoList(adverts);
+    }
+
     public AdvertDto getAdvert(String advertId) throws Exception {
         return advertMapper.toDto(advertRepository.findById(advertId).orElseThrow());
     }

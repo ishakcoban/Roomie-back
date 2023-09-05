@@ -36,6 +36,12 @@ public class Advert {
     @Column(nullable = true)
     private LocalDateTime updatedDate;
 
+    @Column(nullable = false)
+    private int floorArea;
+
+    @Column(nullable = false)
+    private int rooms;
+
     private boolean saved = false;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 public class AdvertRequest {
     private String header;
     private String description;
-    private int price;
     private Location location;
+    private int floorArea;
+    private int rooms;
+    private int price;
 }

@@ -10,4 +10,5 @@ import java.util.List;
 public interface AdvertRepository extends JpaRepository<Advert, String> {
 
     List<Advert> findAllByUserId(String userId);
+    List<Advert> findAllBySavedAndUserId(boolean saved, String userId);
 }
