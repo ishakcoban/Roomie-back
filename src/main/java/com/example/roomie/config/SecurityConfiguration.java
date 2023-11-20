@@ -14,11 +14,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfiguration {
+public class SecurityConfiguration  {
 
     private final com.example.roomie.config.JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
@@ -50,7 +52,7 @@ public class SecurityConfiguration {
 
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.addAllowedOrigin("http://localhost:4200");
+        configuration.addAllowedOrigin("http://localhost:4200/");
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -58,6 +60,5 @@ public class SecurityConfiguration {
 
         return source;
     }
-
 
 }

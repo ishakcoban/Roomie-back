@@ -3,6 +3,7 @@ package com.example.roomie.mapper;
 import com.example.roomie.entity.User;
 import com.example.roomie.modal.dto.UserDto;
 import com.example.roomie.modal.request.RegisterRequest;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -14,10 +15,8 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class UserMapper {
-
     private final PasswordEncoder passwordEncoder;
    // private final ValidationUtils validationUtils;
-
     public UserDto toDto(User user){
 
         return UserDto.builder()

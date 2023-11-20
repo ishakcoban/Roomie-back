@@ -1,6 +1,7 @@
 package com.example.roomie.config;
 
 import com.example.roomie.repository.UserRepository;
+import jakarta.servlet.MultipartConfigElement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

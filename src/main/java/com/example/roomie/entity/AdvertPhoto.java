@@ -16,11 +16,12 @@ public class AdvertPhoto {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    private int photoOrder;
-    private String photoUrl;
+    private String fileName;
+    private String contentType;
+    private byte[] fileData;
 
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    /*@ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "advert_id")
-    private Advert advert;
+    private Advert advert;*/
 
 }
