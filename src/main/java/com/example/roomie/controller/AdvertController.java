@@ -6,6 +6,8 @@ import com.example.roomie.modal.request.AdvertRequest;
 import com.example.roomie.service.AdvertPhotoService;
 import com.example.roomie.service.AdvertService;
 import com.example.roomie.utils.MdcConstant;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.net.jsse.JSSEUtil;
 import org.slf4j.MDC;
@@ -22,9 +24,11 @@ public class AdvertController {
     private final AdvertService advertService;
     private final AdvertPhotoService advertPhotoService;
 
-    @PostMapping
-    public void createAdvert(@RequestBody AdvertRequest advertRequest) throws Exception {
-        advertService.createAdvert(advertRequest, MDC.get(MdcConstant.X_USER_ID));
+    @PostMapping(value = "/upload", consumes ={"multipart/form-data", "application/json"} )
+    public void uploadFiles(@RequestPart("images") MultipartFile[] images, @RequestPart("otherInformation") String otherInformation) throws Exception {
+
+        advertService.createAdvert(otherInformation,images,MDC.get(MdcConstant.X_USER_ID));
+
     }
 
     @GetMapping
@@ -62,12 +66,6 @@ public class AdvertController {
         advertService.updateSavedStatusOfAdvert(id);
     }
 
-    @PostMapping(value = "/upload")
-    public void uploadFiles(@RequestBody AdvertRequest advertRequest) throws Exception {
-        // Save the uploaded files
-        //advertPhotoService.savePhotos(files);
-        System.out.println(advertRequest);
-        System.out.println();
-    }
+
 
 }

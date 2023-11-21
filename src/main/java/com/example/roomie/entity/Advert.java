@@ -32,12 +32,6 @@ public class Advert extends AuditorEntity {
     private int price;
 
     @Column(nullable = false)
-    private LocalDateTime createdDate;
-
-    @Column(nullable = true)
-    private LocalDateTime updatedDate;
-
-    @Column(nullable = false)
     private int floorArea;
 
     @Column(nullable = false)

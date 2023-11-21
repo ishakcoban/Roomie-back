@@ -18,5 +18,4 @@ public class AdvertRequest {
     private int floorArea;
     private int rooms;
     private int price;
-    private MultipartFile[] files;
 }

@@ -20,11 +20,7 @@ public class AdvertPhotoService {
     private final AdvertPhotoMapper advertPhotoMapper;
     public void savePhotos(MultipartFile[] files) throws Exception {
 
-        for (MultipartFile file : files)
-        {
-            AdvertPhoto newAdvertPhoto = advertPhotoMapper.createAdvertPhoto(file);
-            advertPhotoRepository.save(newAdvertPhoto);
-        }
+
 
     }
 

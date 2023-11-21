@@ -1,16 +1,22 @@
 package com.example.roomie.service;
 
 import com.example.roomie.entity.Advert;
+import com.example.roomie.entity.AdvertPhoto;
 import com.example.roomie.entity.Location;
 import com.example.roomie.entity.User;
 import com.example.roomie.mapper.AdvertMapper;
+import com.example.roomie.mapper.AdvertPhotoMapper;
 import com.example.roomie.modal.dto.AdvertDto;
 import com.example.roomie.modal.request.AdvertRequest;
+import com.example.roomie.repository.AdvertPhotoRepository;
 import com.example.roomie.repository.AdvertRepository;
 import com.example.roomie.repository.LocationRepository;
 import com.example.roomie.repository.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,14 +26,31 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AdvertService {
     private final AdvertRepository advertRepository;
+    private final AdvertPhotoRepository advertPhotoRepository;
     private final UserRepository userRepository;
     private final LocationRepository locationRepository;
     private final AdvertMapper advertMapper;
+    private final AdvertPhotoMapper advertPhotoMapper;
 
-    public void createAdvert(AdvertRequest advertRequest,String userId) throws Exception {
-        User user = userRepository.findById(userId).orElseThrow();
+    @Transactional
+    public void createAdvert(String otherInformation, MultipartFile[] images,String userID) throws Exception {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        AdvertRequest advertRequest = objectMapper.readValue(otherInformation, AdvertRequest.class);;
+
+        User user = userRepository.findById(userID).orElseThrow();
         Advert advert = AdvertMapper.createAdvert(advertRequest,user);
         advertRepository.save(advert);
+
+        int photoOrder = 1;
+        for (MultipartFile image : images)
+        {
+            AdvertPhoto advertPhoto = advertPhotoMapper.createAdvertPhoto(image,advert,photoOrder);
+            advertPhotoRepository.save(advertPhoto);
+            photoOrder++;
+        }
+
+
     }
 
     public List<AdvertDto> getAllByUser(String userId) throws Exception {
@@ -72,7 +95,6 @@ public class AdvertService {
         advert.setHeader(advertRequest.getHeader());
         advert.setDescription(advertRequest.getDescription());
         advert.setPrice(advertRequest.getPrice());
-        advert.setUpdatedDate(LocalDateTime.now());
         location.setCity(advertRequest.getLocation().getCity());
         location.setDistrict(advertRequest.getLocation().getDistrict());
         location.setNeighbourhood(advertRequest.getLocation().getNeighbourhood());

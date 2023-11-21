@@ -23,8 +23,6 @@ public class AdvertMapper {
                 .header(advert.getHeader())
                 .description(advert.getDescription())
                 .price(advert.getPrice())
-                .createdDate(advert.getCreatedDate())
-                .updatedDate(advert.getUpdatedDate())
                 .saved(advert.isSaved())
                 .location(advert.getLocation())
                 .user(userMapper.toDto(advert.getUser()))
@@ -36,8 +34,6 @@ public class AdvertMapper {
                 .header(advertRequest.getHeader())
                 .description(advertRequest.getDescription())
                 .price(advertRequest.getPrice())
-                .createdDate(LocalDateTime.now())
-                .updatedDate(null)
                 .user(user)
                 .location(advertRequest.getLocation())
                 .build();
