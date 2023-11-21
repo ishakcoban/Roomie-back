@@ -1,5 +1,6 @@
 package com.example.roomie.entity;
 
+import com.example.roomie.utils.AuditorEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "locations")
-public class Location {
+public class Location extends AuditorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

@@ -1,5 +1,6 @@
 package com.example.roomie.entity;
 
+import com.example.roomie.utils.AuditorEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -19,7 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class User extends AuditorEntity implements UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)

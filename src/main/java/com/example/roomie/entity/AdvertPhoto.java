@@ -1,5 +1,6 @@
 package com.example.roomie.entity;
 
+import com.example.roomie.utils.AuditorEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,18 +11,19 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "advertPhotos")
-public class AdvertPhoto {
+public class AdvertPhoto extends AuditorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
+    private int photoOrder;
     private String fileName;
     private String contentType;
     private byte[] fileData;
 
-    /*@ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne
     @JoinColumn(name = "advert_id")
-    private Advert advert;*/
+    private Advert advert;
 
 }

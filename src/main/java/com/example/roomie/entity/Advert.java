@@ -1,5 +1,6 @@
 package com.example.roomie.entity;
 
+import com.example.roomie.utils.AuditorEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "adverts")
-public class Advert {
+public class Advert extends AuditorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
