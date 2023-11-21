@@ -5,6 +5,7 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.security.Principal;
 import java.util.Optional;
 
 public class AuditorAwareImpl implements AuditorAware<String> {
@@ -14,11 +15,18 @@ public class AuditorAwareImpl implements AuditorAware<String> {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // todo: add checks if authentication is present and user is not null (i.e. signed in).
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return Optional.empty();
+        }
 
-        User user = (User) authentication.getPrincipal();
+        Object principal = authentication.getPrincipal();
 
-        return Optional.of(user.getId());
+        if (principal instanceof User) {
+            User user = (User) principal;
+            return Optional.of(user.getId());
+        }
+
+        return Optional.empty();
     }
 
 }

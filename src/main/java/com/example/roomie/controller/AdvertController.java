@@ -7,6 +7,7 @@ import com.example.roomie.service.AdvertPhotoService;
 import com.example.roomie.service.AdvertService;
 import com.example.roomie.utils.MdcConstant;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.net.jsse.JSSEUtil;
 import org.slf4j.MDC;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,12 +62,12 @@ public class AdvertController {
         advertService.updateSavedStatusOfAdvert(id);
     }
 
-    @PostMapping(value = "/upload", consumes = "multipart/form-data")
-    public ResponseEntity<String> uploadFiles(@RequestParam("files") MultipartFile[] files) throws Exception {
+    @PostMapping(value = "/upload")
+    public void uploadFiles(@RequestBody AdvertRequest advertRequest) throws Exception {
         // Save the uploaded files
-        advertPhotoService.savePhotos(files);
-
-        return ResponseEntity.ok("Files uploaded successfully.");
+        //advertPhotoService.savePhotos(files);
+        System.out.println(advertRequest);
+        System.out.println();
     }
 
 }

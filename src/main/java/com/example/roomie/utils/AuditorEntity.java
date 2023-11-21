@@ -25,7 +25,6 @@ public abstract class AuditorEntity {
     @Column(name = "CreatedBy")
     private String createdBy;
 
-
     @LastModifiedDate
     @Column(name = "UpdatedOn")
     private LocalDateTime updatedOn;
@@ -57,5 +56,6 @@ public abstract class AuditorEntity {
             }
         }
     }
+
 
 }

@@ -84,4 +84,5 @@ public class User extends AuditorEntity implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
+
 }
