@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("api/advertPhotos")
 @RequiredArgsConstructor
 public class AdvertPhotoController {
-private final AdvertPhotoRepository advertPhotoRepository;
+    private final AdvertPhotoRepository advertPhotoRepository;
     @GetMapping("/getAll")
     public List<AdvertPhoto> getAll() throws Exception {
         return advertPhotoRepository.findAll();

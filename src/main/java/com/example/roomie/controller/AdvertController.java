@@ -41,11 +41,6 @@ public class AdvertController {
         return advertService.getAllAdverts();
     }
 
-    @GetMapping("/getAllSavedAdverts")
-    public List<AdvertDto> getAllSavedAdvertsByUser() throws Exception {
-        return advertService.getAllSavedAdvertsByUser(MDC.get(MdcConstant.X_USER_ID));
-    }
-
     @GetMapping("/{id}")
     public AdvertDto getAdvert(@PathVariable String id) throws Exception {
         return advertService.getAdvert(id);
@@ -60,12 +55,5 @@ public class AdvertController {
     public void updateAdvert(@PathVariable String id,@RequestBody AdvertRequest advertRequest) throws Exception {
         advertService.updateAdvert(id,advertRequest);
     }
-
-    @PatchMapping("/{id}")
-    public void updateSavedStatusOfAdvert(@PathVariable String id) throws Exception {
-        advertService.updateSavedStatusOfAdvert(id);
-    }
-
-
 
 }

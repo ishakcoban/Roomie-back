@@ -23,7 +23,6 @@ public class AdvertMapper {
                 .header(advert.getHeader())
                 .description(advert.getDescription())
                 .price(advert.getPrice())
-                .saved(advert.isSaved())
                 .location(advert.getLocation())
                 .user(userMapper.toDto(advert.getUser()))
                 .build();

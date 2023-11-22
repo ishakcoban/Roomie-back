@@ -37,8 +37,6 @@ public class Advert extends AuditorEntity {
     @Column(nullable = false)
     private int rooms;
 
-    private boolean saved = false;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;

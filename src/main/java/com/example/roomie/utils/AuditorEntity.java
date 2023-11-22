@@ -3,6 +3,7 @@ package com.example.roomie.utils;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.MDC;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -41,21 +42,21 @@ public abstract class AuditorEntity {
 
     @Column(name = "isDeleted")
     private Boolean isDeleted = false;
-
+/*
     @PreUpdate
     @PrePersist
     public void beforeAnyUpdate() {
         if (isDeleted != null && isDeleted) {
 
-            /*if (deletedBy == null) {
-                deletedBy = SignedUserHelper.userId().toString();
-            }*/
+            if (deletedBy == null) {
+                deletedBy = MDC.get(MdcConstant.X_USER_ID);
+            }
 
             if (getDeletedOn() == null) {
                 deletedOn = LocalDateTime.now();
             }
         }
-    }
+    }*/
 
 
 }
