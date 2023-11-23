@@ -26,4 +26,8 @@ public class AdvertPhoto extends AuditorEntity {
     @JoinColumn(name = "advert_id")
     private Advert advert;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

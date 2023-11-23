@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,18 +54,25 @@ public class AdvertService {
 
     }
 
-    public List<AdvertDto> getAllByUser(String userId) throws Exception {
+    public List<AdvertDto> getAllAdvertsByUser(String userId) throws Exception {
 
         List<Advert> adverts = advertRepository.findAllByUserId(userId);
-        return advertMapper.toDtoList(adverts);
+        List<AdvertPhoto> advertPhotos = advertPhotoRepository.findAllByUserId(userId);
+
+        return advertMapper.toDtoList(adverts,advertPhotos);
     }
 
     public List<AdvertDto> getAllAdverts() throws Exception {
-        return advertMapper.toDtoList(advertRepository.findAll());
+
+        List<Advert> adverts = advertRepository.findAll();
+        List<AdvertPhoto> advertPhotos = advertPhotoRepository.findAll();
+
+        return advertMapper.toDtoList(adverts,advertPhotos);
+
     }
 
     public AdvertDto getAdvert(String advertId) throws Exception {
-        return advertMapper.toDto(advertRepository.findById(advertId).orElseThrow());
+        return /*advertMapper.toDto(advertRepository.findById(advertId).orElseThrow())*/null;
     }
 
     public void deleteAdvert(String advertId) throws Exception {

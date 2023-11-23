@@ -33,7 +33,7 @@ public class AdvertController {
 
     @GetMapping
     public List<AdvertDto> getAllAdvertsByUser() throws Exception {
-        return advertService.getAllByUser(MDC.get(MdcConstant.X_USER_ID));
+        return advertService.getAllAdvertsByUser(MDC.get(MdcConstant.X_USER_ID));
     }
 
     @GetMapping("/getAll")
