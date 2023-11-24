@@ -3,6 +3,7 @@ package com.example.roomie.controller;
 import com.example.roomie.entity.Advert;
 import com.example.roomie.modal.dto.AdvertDto;
 import com.example.roomie.modal.request.AdvertRequest;
+import com.example.roomie.modal.request.FilterAdvertRequest;
 import com.example.roomie.service.AdvertPhotoService;
 import com.example.roomie.service.AdvertService;
 import com.example.roomie.utils.MdcConstant;
@@ -54,6 +55,11 @@ public class AdvertController {
     @PutMapping("/{id}")
     public void updateAdvert(@PathVariable String id,@RequestBody AdvertRequest advertRequest) throws Exception {
         advertService.updateAdvert(id,advertRequest);
+    }
+
+    @PostMapping("/filter")
+    public List<AdvertDto> filterAdvert(@RequestBody FilterAdvertRequest filterAdvertRequest) throws Exception {
+        return advertService.filterAdvert(filterAdvertRequest);
     }
 
 }

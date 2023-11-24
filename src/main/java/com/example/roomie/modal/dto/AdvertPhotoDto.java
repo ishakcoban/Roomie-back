@@ -1,11 +1,6 @@
 package com.example.roomie.modal.dto;
 
-import com.example.roomie.entity.Advert;
-import com.example.roomie.entity.AdvertPhoto;
-import com.example.roomie.entity.Location;
 import lombok.*;
-
-import java.util.List;
 
 @Getter
 @Setter

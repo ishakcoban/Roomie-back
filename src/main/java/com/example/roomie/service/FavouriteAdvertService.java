@@ -48,8 +48,7 @@ public class FavouriteAdvertService {
             FavouriteAdvert newFavouriteAdvert = favouriteAdvertMapper.createFavouriteAdvert(existedAdvert,existedUser);
             favouriteAdvertRepository.save(newFavouriteAdvert);
         }else {
-            favouriteAdvert.setIsDeleted(true);
-            favouriteAdvertRepository.save(favouriteAdvert);
+            favouriteAdvertRepository.delete(favouriteAdvert);
         }
 
     }

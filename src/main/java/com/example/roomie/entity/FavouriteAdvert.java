@@ -12,7 +12,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "favouriteAdverts")
-public class FavouriteAdvert extends AuditorEntity {
+public class FavouriteAdvert {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

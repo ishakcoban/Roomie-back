@@ -28,7 +28,9 @@ public class AdvertMapper {
                 .header(advert.getHeader())
                 .description(advert.getDescription())
                 .price(advert.getPrice())
-                .location(advert.getLocation())
+                .city(advert.getCity())
+                .district(advert.getDistrict())
+                .neighbourhood(advert.getNeighbourhood())
                 .user(userMapper.toDto(advert.getUser()))
                 .photos(advertPhotos)
                 .build();
@@ -40,7 +42,9 @@ public class AdvertMapper {
                 .description(advertRequest.getDescription())
                 .price(advertRequest.getPrice())
                 .user(user)
-                .location(advertRequest.getLocation())
+                .city(advertRequest.getCity())
+                .district(advertRequest.getDistrict())
+                .neighbourhood(advertRequest.getNeighbourhood())
                 .build();
     }
     public List<AdvertDto> toDtoList(List<Advert> adverts,List<AdvertPhoto> advertPhotos) {
