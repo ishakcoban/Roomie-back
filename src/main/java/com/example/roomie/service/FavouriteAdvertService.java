@@ -34,7 +34,7 @@ public class FavouriteAdvertService {
                 .collect(Collectors.toList());
         List<AdvertPhoto> advertPhotos = advertPhotoRepository.findAllByUserId(userID);
 
-        return advertMapper.toDtoList(adverts,advertPhotos);
+        return null/*advertMapper.toDtoList(adverts,advertPhotos)*/;
     }
 
     public void changeFavouriteAdvertStatus(String userID,String advertID) throws Exception {

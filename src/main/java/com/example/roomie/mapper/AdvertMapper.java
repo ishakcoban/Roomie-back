@@ -21,7 +21,7 @@ public class AdvertMapper {
     private final UserMapper userMapper;
     private final AdvertPhotoMapper advertPhotoMapper;
 
-    public AdvertDto toDto(Advert advert,List<AdvertPhotoDto> advertPhotos) {
+    public AdvertDto toDto(Advert advert) {
 
         return AdvertDto.builder()
                 .id(advert.getId())
@@ -32,7 +32,7 @@ public class AdvertMapper {
                 .district(advert.getDistrict())
                 .neighbourhood(advert.getNeighbourhood())
                 .user(userMapper.toDto(advert.getUser()))
-                .photos(advertPhotos)
+                .photos(advertPhotoMapper.toDtoList(advert.getPhotos()))
                 .build();
     }
     public static Advert createAdvert(AdvertRequest advertRequest,User user) throws Exception{
@@ -47,13 +47,8 @@ public class AdvertMapper {
                 .neighbourhood(advertRequest.getNeighbourhood())
                 .build();
     }
-    public List<AdvertDto> toDtoList(List<Advert> adverts,List<AdvertPhoto> advertPhotos) {
+    public List<AdvertDto> toDtoList(List<Advert> adverts) {
 
-        Map<String, List<AdvertPhoto>> advertPhotoMap = advertPhotos.stream()
-                .collect(Collectors.groupingBy(photo -> photo.getAdvert().getId()));
-
-        return adverts.stream()
-                .map(advert -> toDto(advert,advertPhotoMapper.toDtoList(advertPhotoMap.get(advert.getId()))))
-                .toList();
+        return adverts.stream().map(this::toDto).collect(Collectors.toList());
     }
 }

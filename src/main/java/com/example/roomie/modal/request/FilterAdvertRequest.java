@@ -21,5 +21,6 @@ public class FilterAdvertRequest {
     private String neighbourhood;
     private int floorArea;
     private int rooms;
-    private int price;
+    private int minPrice;
+    private int maxPrice;
 }

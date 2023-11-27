@@ -13,8 +13,11 @@ import com.example.roomie.modal.request.FilterAdvertRequest;
 import com.example.roomie.repository.AdvertPhotoRepository;
 import com.example.roomie.repository.AdvertRepository;
 import com.example.roomie.repository.UserRepository;
+import com.example.roomie.utils.AdvertSpecifications;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,19 +34,19 @@ public class AdvertService {
     private final AdvertPhotoMapper advertPhotoMapper;
 
     @Transactional
-    public void createAdvert(String otherInformation, MultipartFile[] images,String userID) throws Exception {
+    public void createAdvert(String otherInformation, MultipartFile[] images, String userID) throws Exception {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        AdvertRequest advertRequest = objectMapper.readValue(otherInformation, AdvertRequest.class);;
+        AdvertRequest advertRequest = objectMapper.readValue(otherInformation, AdvertRequest.class);
+        ;
 
         User user = userRepository.findById(userID).orElseThrow();
-        Advert advert = AdvertMapper.createAdvert(advertRequest,user);
+        Advert advert = AdvertMapper.createAdvert(advertRequest, user);
         advertRepository.save(advert);
 
         int photoOrder = 1;
-        for (MultipartFile image : images)
-        {
-            AdvertPhoto advertPhoto = advertPhotoMapper.createAdvertPhoto(image,advert,photoOrder);
+        for (MultipartFile image : images) {
+            AdvertPhoto advertPhoto = advertPhotoMapper.createAdvertPhoto(image, advert, photoOrder);
             advertPhotoRepository.save(advertPhoto);
             photoOrder++;
         }
@@ -56,7 +59,7 @@ public class AdvertService {
         List<Advert> adverts = advertRepository.findAllByUserId(userId);
         List<AdvertPhoto> advertPhotos = advertPhotoRepository.findAllByUserId(userId);
 
-        return advertMapper.toDtoList(adverts,advertPhotos);
+        return null/*advertMapper.toDtoList(adverts, advertPhotos)*/;
     }
 
     public List<AdvertDto> getAllAdverts() throws Exception {
@@ -64,7 +67,7 @@ public class AdvertService {
         List<Advert> adverts = advertRepository.findAll();
         List<AdvertPhoto> advertPhotos = advertPhotoRepository.findAll();
 
-        return advertMapper.toDtoList(adverts,advertPhotos);
+        return null/*advertMapper.toDtoList(adverts, advertPhotos)*/;
 
     }
 
@@ -78,7 +81,7 @@ public class AdvertService {
     }
 
 
-    public void updateAdvert(String advertId,AdvertRequest advertRequest) throws Exception {
+    public void updateAdvert(String advertId, AdvertRequest advertRequest) throws Exception {
        /* Advert advert = advertRepository.findById(advertId).orElseThrow();
         Location location = locationRepository.findById(advert.getLocation().getId()).orElseThrow();
         advert.setHeader(advertRequest.getHeader());
@@ -92,70 +95,13 @@ public class AdvertService {
     }
 
     public List<AdvertDto> filterAdvert(FilterAdvertRequest filterAdvertRequest) throws Exception {
-/*
-    private DateStatus dateStatus;
-    private PriceStatus priceStatus;
-    private String city;
-    private String district;
-    private String neighbourhood;
-    private int floorArea;
-    private int rooms;
-    private int price;
 
-*/
+        Specification<Advert> spec = Specification.where(null);
 
-      //List<Location> locations = locationRepository.findAllByCityAndDistrictOrderByUpdatedOnDesc(filterAdvertRequest.getCity(),filterAdvertRequest.getDistrict());
-      //  System.out.println();
-      /*  if(filterAdvertRequest.getCity() == null || filterAdvertRequest.getRooms() == null || filterAdvertRequest.getPrice() == null){
+        spec = spec.and(AdvertSpecifications.getFilterQuery(filterAdvertRequest));
 
+        List<Advert> adverts = advertRepository.findAll(spec);
 
-            List<Advert> adverts = advertRepository.findAll();
-            List<AdvertPhoto> advertPhotos = advertPhotoRepository.findAll();
-
-            return advertMapper.toDtoList(adverts,advertPhotos);
-
-        }*/
-
-/*
-Scenarios
-1- city district neighbourhood floorarea rooms price null
-2- district neighbourhood floorarea rooms price null
-3- neighbourhood floorarea rooms price null
-4- floorarea rooms price null
-5- rooms price null
-6- price null
-7- city district neighbourhood floorarea rooms null
-
- */
-
-
-
-
-        return null;
-    }
-
-
-    public List<Advert> sortAdverts(FilterAdvertRequest filterAdvertRequest){
-        switch (filterAdvertRequest.getDateStatus()) {
-            case DateStatus.NEAREST -> {
-                if (filterAdvertRequest.getPriceStatus() == PriceStatus.LOWEST){
-
-                }else{
-
-                }
-
-            }
-            case DateStatus.FURTHEST -> {
-                if (filterAdvertRequest.getPriceStatus() == PriceStatus.LOWEST){
-
-                }else{
-
-                }
-
-            }
-
-        };
-        return null;
-
+        return advertMapper.toDtoList(adverts);
     }
 }

@@ -50,4 +50,8 @@ public class Advert extends AuditorEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "advert")
+    private List<AdvertPhoto> photos;
+
+
 }
