@@ -19,8 +19,8 @@ import java.util.List;
 public class Advert extends AuditorEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false)
     private String header;
@@ -50,8 +50,7 @@ public class Advert extends AuditorEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "advert")
-    private List<AdvertPhoto> photos;
-
+    @OneToMany(mappedBy = "advert", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AdvertPhoto> advertPhotos;
 
 }

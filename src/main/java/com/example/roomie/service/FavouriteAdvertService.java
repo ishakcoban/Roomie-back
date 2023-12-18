@@ -27,22 +27,22 @@ public class FavouriteAdvertService {
     private final FavouriteAdvertRepository favouriteAdvertRepository;
     private final AdvertPhotoRepository advertPhotoRepository;
     private final AdvertMapper advertMapper;
-    public List<AdvertDto> getAllFavouriteAdvertsByUser(String userID) throws Exception {
-        List<FavouriteAdvert> favouriteAdverts = favouriteAdvertRepository.findAllByUserId(userID);
+    public List<AdvertDto> getAllFavouriteAdvertsByUser(Long userId) throws Exception {
+        List<FavouriteAdvert> favouriteAdverts = favouriteAdvertRepository.findAllByUserId(userId);
         List<Advert> adverts = favouriteAdverts.stream()
                 .map(FavouriteAdvert::getAdvert)
                 .collect(Collectors.toList());
-        List<AdvertPhoto> advertPhotos = advertPhotoRepository.findAllByUserId(userID);
+        List<AdvertPhoto> advertPhotos = advertPhotoRepository.findAllByUserId(userId);
 
         return null/*advertMapper.toDtoList(adverts,advertPhotos)*/;
     }
 
-    public void changeFavouriteAdvertStatus(String userID,String advertID) throws Exception {
+    public void changeFavouriteAdvertStatus(Long userId,Long advertId) throws Exception {
 
-        Advert existedAdvert = advertRepository.findById(advertID).orElseThrow();
-        User existedUser = userRepository.findById(userID).orElseThrow();
+        Advert existedAdvert = advertRepository.findById(advertId).orElseThrow();
+        User existedUser = userRepository.findById(userId).orElseThrow();
 
-        FavouriteAdvert favouriteAdvert = favouriteAdvertRepository.findByUserIdAndAdvertId(userID,advertID);
+        FavouriteAdvert favouriteAdvert = favouriteAdvertRepository.findByUserIdAndAdvertId(userId,advertId);
 
         if (favouriteAdvert == null){
             FavouriteAdvert newFavouriteAdvert = favouriteAdvertMapper.createFavouriteAdvert(existedAdvert,existedUser);

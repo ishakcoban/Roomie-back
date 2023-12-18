@@ -17,11 +17,10 @@ public class FavouriteAdvertController {
 
     @GetMapping
     public List<AdvertDto> getAllFavouriteAdvertsByUser() throws Exception {
-
-        return favouriteAdvertService.getAllFavouriteAdvertsByUser(MDC.get(MdcConstant.X_USER_ID));
+        return favouriteAdvertService.getAllFavouriteAdvertsByUser(Long.valueOf(MDC.get(MdcConstant.X_USER_ID)));
     }
-    @PatchMapping("/{advertID}")
-    public void changeFavouriteAdvertStatus(@PathVariable String advertID) throws Exception {
-        favouriteAdvertService.changeFavouriteAdvertStatus(MDC.get(MdcConstant.X_USER_ID),advertID);
+    @PatchMapping("/{advertId}")
+    public void changeFavouriteAdvertStatus(@PathVariable Long advertId) throws Exception {
+        favouriteAdvertService.changeFavouriteAdvertStatus(Long.valueOf(MDC.get(MdcConstant.X_USER_ID)),advertId);
     }
 }

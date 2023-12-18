@@ -52,7 +52,7 @@ public class SecurityConfiguration  {
 
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.addAllowedOrigin("http://localhost:4200/");
+        configuration.addAllowedOrigin("https://roomie.ishakcoban.dev/");
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -14,8 +14,8 @@ import lombok.*;
 public class AdvertPhoto extends AuditorEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private int photoOrder;
     private String fileName;

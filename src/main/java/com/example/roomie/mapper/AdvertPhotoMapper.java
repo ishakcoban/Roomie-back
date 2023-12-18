@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -36,7 +37,7 @@ public class AdvertPhotoMapper {
                 .build();
     }
 
-   public java.util.List<AdvertPhotoDto> toDtoList(java.util.List<AdvertPhoto> advertPhotos) {
+   public List<AdvertPhotoDto> toDtoList(List<AdvertPhoto> advertPhotos) {
        return advertPhotos.stream().map(this::toDto).collect(Collectors.toList());
    }
 }

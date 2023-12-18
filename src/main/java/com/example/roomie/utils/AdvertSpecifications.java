@@ -1,11 +1,17 @@
 package com.example.roomie.utils;
 
 import com.example.roomie.entity.Advert;
+import com.example.roomie.entity.AdvertPhoto;
+import com.example.roomie.modal.enums.DateStatus;
+import com.example.roomie.modal.enums.PriceStatus;
+import com.example.roomie.modal.request.AdvertRequest;
 import com.example.roomie.modal.request.FilterAdvertRequest;
 import io.micrometer.common.util.StringUtils;
-import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class AdvertSpecifications {
@@ -34,7 +40,22 @@ public class AdvertSpecifications {
                 conjunction = cb.and(conjunction,cb.between(root.get("price"), filterAdvertRequest.getMinPrice(),filterAdvertRequest.getMaxPrice()));
             }
 
-            query.orderBy(cb.desc(root.get("updatedOn")));
+            if(filterAdvertRequest.getPriceStatus() == PriceStatus.toHIGHEST){
+                query.orderBy(cb.asc(root.get("price")));
+            }
+
+            if(filterAdvertRequest.getPriceStatus() == PriceStatus.toLOWEST){
+                query.orderBy(cb.desc(root.get("price")));
+            }
+
+            if(filterAdvertRequest.getDateStatus() == DateStatus.toNEAREST){
+                query.orderBy(cb.asc(root.get("updatedOn")));
+            }
+
+            if(filterAdvertRequest.getDateStatus() == DateStatus.toFURTHEST){
+                query.orderBy(cb.desc(root.get("updatedOn")));
+            }
+
             return conjunction;
         };
     }

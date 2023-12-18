@@ -25,11 +25,11 @@ public class UserService {
         }
     }
 
-    public UserDto getUserById(String id) {
+    public UserDto getUserById(Long id) {
         return userMapper.toDto(userRepository.findById(id).orElseThrow());
     }
 
-    public void updateUser(String id, UserUpdateRequest userUpdateRequest) {
+    public void updateUser(Long id, UserUpdateRequest userUpdateRequest) {
 
         User user = userRepository.findById(id).orElseThrow();
 
@@ -42,7 +42,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void deleteUser(String id) {
+    public void deleteUser(Long id) {
         User user = userRepository.findById(id).orElseThrow();
         userRepository.delete(user);
     }

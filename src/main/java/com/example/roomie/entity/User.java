@@ -17,14 +17,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
 @Table(name = "users")
 public class User extends AuditorEntity implements UserDetails {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   @Column(nullable = false, unique = true)
   private String userName;
@@ -46,6 +45,11 @@ public class User extends AuditorEntity implements UserDetails {
   @Column(nullable = false)
   private String password;
 
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<FavouriteAdvert> favouriteAdverts;
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<Advert> adverts;
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return null;

@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 public class AdvertPhotoDto {
 
-    private String id;
+    private long id;
     private int photoOrder;
     private String fileName;
     private String contentType;

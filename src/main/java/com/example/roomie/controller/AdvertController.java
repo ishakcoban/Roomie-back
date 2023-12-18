@@ -1,7 +1,10 @@
 package com.example.roomie.controller;
 
 import com.example.roomie.entity.Advert;
+import com.example.roomie.entity.AdvertPhoto;
 import com.example.roomie.modal.dto.AdvertDto;
+import com.example.roomie.modal.dto.AdvertPhotoDto;
+import com.example.roomie.modal.dto.UserDto;
 import com.example.roomie.modal.request.AdvertRequest;
 import com.example.roomie.modal.request.FilterAdvertRequest;
 import com.example.roomie.service.AdvertPhotoService;
@@ -27,14 +30,12 @@ public class AdvertController {
 
     @PostMapping(value = "/upload", consumes ={"multipart/form-data", "application/json"} )
     public void uploadFiles(@RequestPart("images") MultipartFile[] images, @RequestPart("otherInformation") String otherInformation) throws Exception {
-
-        advertService.createAdvert(otherInformation,images,MDC.get(MdcConstant.X_USER_ID));
-
+        advertService.createAdvert(otherInformation,images, Long.valueOf(MDC.get(MdcConstant.X_USER_ID)));
     }
 
-    @GetMapping
-    public List<AdvertDto> getAllAdvertsByUser() throws Exception {
-        return advertService.getAllAdvertsByUser(MDC.get(MdcConstant.X_USER_ID));
+    @GetMapping("/getByUser")
+    public UserDto getAllAdvertsByUser() throws Exception {
+        return advertService.getAllAdvertsByUser(Long.valueOf(MDC.get(MdcConstant.X_USER_ID)));
     }
 
     @GetMapping("/getAll")
@@ -43,17 +44,17 @@ public class AdvertController {
     }
 
     @GetMapping("/{id}")
-    public AdvertDto getAdvert(@PathVariable String id) throws Exception {
+    public AdvertDto getAdvert(@PathVariable Long id) throws Exception {
         return advertService.getAdvert(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAdvert(@PathVariable String id) throws Exception {
+    public void deleteAdvert(@PathVariable Long id) throws Exception {
         advertService.deleteAdvert(id);
     }
 
     @PutMapping("/{id}")
-    public void updateAdvert(@PathVariable String id,@RequestBody AdvertRequest advertRequest) throws Exception {
+    public void updateAdvert(@PathVariable Long id,@RequestBody AdvertRequest advertRequest) throws Exception {
         advertService.updateAdvert(id,advertRequest);
     }
 

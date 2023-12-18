@@ -16,7 +16,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserMapper {
     private final PasswordEncoder passwordEncoder;
-   // private final ValidationUtils validationUtils;
+    private final AdvertMapper advertMapper;
+    private final FavouriteAdvertMapper favouriteAdvertMapper;
     public UserDto toDto(User user){
 
         return UserDto.builder()
@@ -26,6 +27,7 @@ public class UserMapper {
                 .lastName(user.getLastName())
                 .gender(user.getGender())
                 .email(user.getEmail())
+                .adverts(advertMapper.toDtoList(user.getAdverts()))
                 .photoUrl(user.getPhotoUrl())
                 .build();
     }
@@ -41,21 +43,8 @@ public class UserMapper {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
     }
-    public List<UserDto> listToDto(List<User> users){
+    public List<UserDto> toDtoList(List<User> users){
         return users.stream().map(this::toDto).collect(Collectors.toList());
     }
-
-  /*  public UserResponse toResponse(Page<User> userPage){
-
-        return UserResponse.builder()
-                .content(listToDto(userPage.getContent()))
-                .pageNo(userPage.getNumber())
-                .pageSize(userPage.getSize())
-                .totalPages(userPage.getTotalPages())
-                .totalElements(userPage.getTotalElements())
-                .last(userPage.isLast())
-                .build();
-
-    }*/
 
 }

@@ -23,7 +23,7 @@ public class AuditorAwareImpl implements AuditorAware<String> {
 
         if (principal instanceof User) {
             User user = (User) principal;
-            return Optional.of(user.getId());
+            return Optional.of(user.getId().toString());
         }
 
         return Optional.empty();

@@ -1,16 +1,14 @@
 package com.example.roomie.mapper;
 
 import com.example.roomie.entity.Advert;
-import com.example.roomie.entity.AdvertPhoto;
+
 import com.example.roomie.entity.FavouriteAdvert;
 import com.example.roomie.entity.User;
-import com.example.roomie.modal.dto.AdvertPhotoDto;
 import com.example.roomie.modal.dto.FavouriteAdvertDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
@@ -18,13 +16,11 @@ import java.util.stream.Collectors;
 public class FavouriteAdvertMapper {
 
     private final AdvertMapper advertMapper;
-    private final AdvertPhotoMapper advertPhotoMapper;
-    public FavouriteAdvertDto toDto(FavouriteAdvert favouriteAdvert,List<AdvertPhotoDto> advertPhotos) throws Exception{
+    public FavouriteAdvertDto toDto(FavouriteAdvert favouriteAdvert){
 
         return FavouriteAdvertDto.builder()
                 .id(favouriteAdvert.getId())
-              //  .advertDto(advertMapper.toDto())
-                .photos(advertPhotos)
+               // .advertDto(advertMapper.toDto(favouriteAdvert.getAdvert()))
                 .build();
     }
 
@@ -36,13 +32,7 @@ public class FavouriteAdvertMapper {
                 .build();
     }
 
-  /*  public List<FavouriteAdvertDto> toDtoList(List<FavouriteAdvert> favouriteAdverts,List<AdvertPhoto> advertPhotos) {
-        Map<String, List<AdvertPhoto>> advertPhotoMap = advertPhotos.stream()
-                .collect(Collectors.groupingBy(photo -> photo.getAdvert().getId()));
-
-        return favouriteAdverts.stream()
-                .map(advert -> toDto(advert,advertPhotoMapper.toDtoList(advertPhotoMap.get(advert.getId()))))
-                .toList();
-
-    }*/
+    public List<FavouriteAdvertDto> toDtoList(List<FavouriteAdvert> favouriteAdverts) {
+        return favouriteAdverts.stream().map(this::toDto).collect(Collectors.toList());
+    }
 }

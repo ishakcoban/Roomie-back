@@ -18,10 +18,8 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class AdvertMapper {
-    private final UserMapper userMapper;
     private final AdvertPhotoMapper advertPhotoMapper;
-
-    public AdvertDto toDto(Advert advert) {
+    public AdvertDto toDto(Advert advert){
 
         return AdvertDto.builder()
                 .id(advert.getId())
@@ -31,11 +29,14 @@ public class AdvertMapper {
                 .city(advert.getCity())
                 .district(advert.getDistrict())
                 .neighbourhood(advert.getNeighbourhood())
-                .user(userMapper.toDto(advert.getUser()))
-                .photos(advertPhotoMapper.toDtoList(advert.getPhotos()))
+                .rooms(advert.getRooms())
+                .floorArea(advert.getFloorArea())
+                .updatedOn(advert.getUpdatedOn())
+                .userName(advert.getUser().getUserName())
+                .photos(advertPhotoMapper.toDtoList(advert.getAdvertPhotos()))
                 .build();
     }
-    public static Advert createAdvert(AdvertRequest advertRequest,User user) throws Exception{
+    public Advert createAdvert(AdvertRequest advertRequest,User user) throws Exception{
 
         return Advert.builder()
                 .header(advertRequest.getHeader())
@@ -45,10 +46,26 @@ public class AdvertMapper {
                 .city(advertRequest.getCity())
                 .district(advertRequest.getDistrict())
                 .neighbourhood(advertRequest.getNeighbourhood())
+                .rooms(advertRequest.getRooms())
+                .floorArea(advertRequest.getFloorArea())
+                .build();
+    }
+    public Advert updateAdvert(Advert existedAdvert,AdvertRequest advertRequest) throws Exception{
+
+        return Advert.builder()
+                .id(existedAdvert.getId())
+                .header(advertRequest.getHeader())
+                .description(advertRequest.getDescription())
+                .price(advertRequest.getPrice())
+                .user(existedAdvert.getUser())
+                .city(advertRequest.getCity())
+                .district(advertRequest.getDistrict())
+                .neighbourhood(advertRequest.getNeighbourhood())
+                .rooms(advertRequest.getRooms())
+                .floorArea(advertRequest.getFloorArea())
                 .build();
     }
     public List<AdvertDto> toDtoList(List<Advert> adverts) {
-
         return adverts.stream().map(this::toDto).collect(Collectors.toList());
     }
 }

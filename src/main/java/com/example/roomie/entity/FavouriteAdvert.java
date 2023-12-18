@@ -4,6 +4,8 @@ import com.example.roomie.utils.AuditorEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Setter
 @Getter
 @Builder
@@ -15,8 +17,8 @@ import lombok.*;
 public class FavouriteAdvert {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "user_id")
@@ -25,6 +27,8 @@ public class FavouriteAdvert {
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "advert_id")
     private Advert advert;
+
+
 
 }
 

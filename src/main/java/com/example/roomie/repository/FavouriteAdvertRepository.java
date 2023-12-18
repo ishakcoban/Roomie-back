@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface FavouriteAdvertRepository extends JpaRepository<FavouriteAdvert, String> {
+public interface FavouriteAdvertRepository extends JpaRepository<FavouriteAdvert, Long> {
 
-    FavouriteAdvert findByUserIdAndAdvertId(String userId, String advertId);
-    List<FavouriteAdvert> findAllByUserId(String userId);
+    FavouriteAdvert findByUserIdAndAdvertId(Long userId, Long advertId);
+    List<FavouriteAdvert> findAllByUserId(Long userId);
 }

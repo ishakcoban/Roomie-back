@@ -17,17 +17,17 @@ public class UserController {
 
     @GetMapping
     public UserDto getUser() throws Exception {
-        return userService.getUserById(MDC.get(MdcConstant.X_USER_ID));
+        return userService.getUserById(Long.valueOf(MDC.get(MdcConstant.X_USER_ID)));
     }
 
     @PutMapping
     public void updateUser(@RequestBody UserUpdateRequest userUpdateRequest) throws Exception {
-        userService.updateUser(MDC.get(MdcConstant.X_USER_ID),userUpdateRequest);
+        userService.updateUser(Long.valueOf(MDC.get(MdcConstant.X_USER_ID)),userUpdateRequest);
     }
 
     @DeleteMapping
     public void deleteUser() throws Exception {
-       userService.deleteUser(MDC.get(MdcConstant.X_USER_ID));
+       userService.deleteUser(Long.valueOf(MDC.get(MdcConstant.X_USER_ID)));
     }
 
 }
