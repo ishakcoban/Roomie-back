@@ -13,8 +13,8 @@ pipeline {
         stage('Remove Previous Container and Image') {
             steps {
                 script {
-                    sh "chmod +x mvnw"
-                    sh "./mvnw clean package -DskipTests"
+                    // sh "chmod +x mvnw"
+                    // sh "./mvnw clean package -DskipTests"
                     // Check if the container exists and remove it
                     sh "docker stop ${CONTAINER_NAME} 2>NUL || exit 0"
                     sh "docker rm ${CONTAINER_NAME} 2>NUL || exit 0"
